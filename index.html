@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Our House BBQ Co. • Coming 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Our House BBQ Co. — Slow-smoked premium meats, house-made sausage, and scratch-made sides served with small-town hospitality on Grand Lake. Opening in 2026." />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bbq-red: #b42323;
+      --bbq-cream: #f5e1c4;
+      --bbq-gold: #f3b64a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: "Roboto", sans-serif;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 24px;
+      background: #000;
+    }
+
+    /* 🔥 Smoke GIF Background */
+    .smoke {
+      position: fixed;
+      inset: 0;
+      background-image: url('https://media2.giphy.com/media/xEjTM5COAKyNa/giphy.gif');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.28; /* adjust for strength */
+      z-index: 0;
+      pointer-events: none;
+      filter: blur(1px);
+    }
+
+    .card {
+      max-width: 900px;
+      width: 100%;
+      background: rgba(15, 8, 8, 0.92);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+      padding: 34px 46px 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo {
+      max-width: 320px;
+      width: 80%;
+      margin: 0 auto 20px;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.7));
+      animation: float 4.5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    h1 {
+      font-family: "Oswald";
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      color: var(--bbq-gold);
+      margin-bottom: 6px;
+    }
+
+    .coming-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--bbq-red), #7c1111);
+      color: #fff;
+      border-radius: 999px;
+      padding: 6px 18px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.7);
+    }
+
+    .coming-year { font-weight: 600; }
+
+    .subheadline {
+      font-family: "Oswald";
+      font-size: 2.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bbq-cream);
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      font-size: 1.1rem;
+      color: #e1d7cc;
+      opacity: 0.95;
+      margin-bottom: 14px;
+      line-height: 1.5rem;
+    }
+
+    .smalltag {
+      font-size: 0.95rem;
+      color: #f0e6d7;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+
+    .divider {
+      width: 90px;
+      height: 2px;
+      margin: 0 auto 20px;
+      background: linear-gradient(to right, transparent, var(--bbq-gold), transparent);
+    }
+
+    .details { font-size: 1rem; color: #e5e5e5; margin-bottom: 10px; }
+    .address { font-weight: 500; color: var(--bbq-cream); }
+
+    .note { 
+      font-size: 0.85rem; 
+      color: #d0c5b6; 
+      margin-bottom: 20px; 
+    }
+
+    /* Buttons */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 0.9rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 500;
+      color: #f1e5d6;
+      background: transparent;
+      transition: 0.18s;
+    }
+
+    .btn:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--bbq-red), #6f1010);
+      color: #fff;
+      border: none;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.8);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #cf2c2c, #8a1717);
+    }
+
+    .footer {
+      font-size: 0.78rem;
+      color: #b4a89a;
+      margin-top: 26px;
+      opacity: 0.85;
+    }
+
+    .footer span { color: var(--bbq-gold); }
+  </style>
+</head>
+
+<body>
+  <div class="smoke"></div>
+
+  <main class="card">
+    <img src="ourhouse-logo.png" alt="Our House BBQ Co. logo" class="logo" />
+
+    <h1>Grove, Oklahoma</h1>
+
+    <div class="coming-badge">
+      🔥 COMING SOON <span class="coming-year">2026</span>
+    </div>
+
+    <div class="subheadline">Craft Barbecue • Our Way</div>
+
+    <p class="tagline">
+      Slow-smoked premium meats, house-made sausage, and scratch-made sides —
+      all served with small-town hospitality on Grand Lake.
+    </p>
+
+    <p class="smalltag">
+      Come early, grab a cold drink, and make yourself at home.
+    </p>
+
+    <div class="divider"></div>
+
+    <p class="details address">61991 E 315 Rd · Grove, OK 74344</p>
+    <p class="details">Just down the road, the pits are warming up.</p>
+    <p class="note">Opening in 2026 — exact date to be announced.</p>
+
+    <div class="cta-row">
+      <a href="mailto:info@ourhousebbqco.com?subject=Keep%20me%20posted" class="btn btn-primary">
+        Get Opening Updates
+      </a>
+
+      <a href="https://www.facebook.com/OurHouseBbq/" target="_blank" class="btn">
+        Follow us on Facebook
+      </a>
+    </div>
+
+    <p class="footer">
+      Est. 2017 · <span>Our House BBQ Co.</span> · Craft Barbecue, Grand Lake OK
+    </p>
+  </main>
+</body>
+</html>

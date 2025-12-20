@@ -19,18 +19,24 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      min-height: 100vh;
-      font-family: "Roboto", sans-serif;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-      padding: 24px;
-      background: #000;
-    }
+   body {
+  min-height: 100dvh;
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  /* ✅ allow vertical scrolling on phones */
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  padding: 24px 16px;
+  background: #000;
+  -webkit-overflow-scrolling: touch;
+}
 
     /* 🔥 Smoke GIF Background */
     .smoke {
@@ -232,4 +238,5 @@
   </main>
 </body>
 </html>
+
 

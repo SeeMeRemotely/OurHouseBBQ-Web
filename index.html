@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Our House BBQ Co. • Coming 2026</title>
+  <title>Our House BBQ Co. • Grand Opening January 14, 2026</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="Our House BBQ Co. — Slow-smoked premium meats, house-made sausage, and scratch-made sides served with small-town hospitality on Grand Lake. Opening in 2026." />
+    content="Our House BBQ Co. — Slow-smoked premium meats, house-made sausage, and scratch-made sides served with small-town hospitality on Grand Lake. Grand Opening January 14, 2026 in Grove, OK." />
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
@@ -19,33 +18,28 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-   body {
-  min-height: 100dvh;
-  font-family: "Roboto", sans-serif;
-  color: #fff;
+    body {
+      min-height: 100dvh;
+      font-family: "Roboto", sans-serif;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      background: #000;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  /* ✅ allow vertical scrolling on phones */
-  overflow-x: hidden;
-  overflow-y: auto;
-
-  padding: 24px 16px;
-  background: #000;
-  -webkit-overflow-scrolling: touch;
-}
-
-    /* 🔥 Smoke GIF Background */
     .smoke {
       position: fixed;
       inset: 0;
       background-image: url('https://media2.giphy.com/media/xEjTM5COAKyNa/giphy.gif');
       background-size: cover;
       background-position: center;
-      opacity: 0.28; /* adjust for strength */
+      opacity: 0.28;
       z-index: 0;
       pointer-events: none;
       filter: blur(1px);
@@ -61,6 +55,7 @@
       padding: 34px 46px 30px;
       position: relative;
       z-index: 2;
+      margin: 24px 0;
     }
 
     .logo {
@@ -96,11 +91,22 @@
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
       box-shadow: 0 6px 16px rgba(0,0,0,0.7);
     }
 
-    .coming-year { font-weight: 600; }
+    .countdown {
+      font-size: 0.95rem;
+      color: #f9ebd7;
+      margin-bottom: 16px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .countdown strong {
+      color: var(--bbq-gold);
+    }
 
     .subheadline {
       font-family: "Oswald";
@@ -137,12 +143,12 @@
     .address { font-weight: 500; color: var(--bbq-cream); }
 
     .note { 
-      font-size: 0.85rem; 
-      color: #d0c5b6; 
+      font-size: 0.9rem; 
+      color: #f3e4cf; 
       margin-bottom: 20px; 
+      font-weight: 500;
     }
 
-    /* Buttons */
     .cta-row {
       display: flex;
       flex-wrap: wrap;
@@ -202,13 +208,15 @@
     <h1>Grove, Oklahoma</h1>
 
     <div class="coming-badge">
-      🔥 COMING SOON <span class="coming-year">2026</span>
+      🔥 GRAND OPENING <span class="coming-year">JAN 14 · 2026</span>
     </div>
+
+    <div id="countdown" class="countdown" aria-live="polite"></div>
 
     <div class="subheadline">Craft Barbecue • Our Way</div>
 
     <p class="tagline">
-      Slow-smoked premium meats, sausages, and scratch-made sides —
+      Slow-smoked premium meats, sausage, and scratch-made sides —
       all served with small-town hospitality on Grand Lake.
     </p>
 
@@ -220,15 +228,11 @@
 
     <p class="details address">61991 E 315 Rd · Grove, OK 74344</p>
     <p class="details">Just down the road, the pits are warming up.</p>
-    <p class="note">Opening in 2026 — exact date to be announced.</p>
+    <p class="note">Grand Opening • January 14, 2026</p>
 
     <div class="cta-row">
-      <a href="mailto:info@ourhousebbqco.com?subject=Keep%20me%20posted" class="btn btn-primary">
-        Get Opening Updates
-      </a>
-
       <a href="https://www.facebook.com/OurHouseBbq/" target="_blank" class="btn">
-        Follow us on Facebook
+        Follow Us on Facebook
       </a>
     </div>
 
@@ -236,7 +240,37 @@
       Est. 2017 · <span>Our House BBQ Co.</span> · Craft Barbecue, Grand Lake OK
     </p>
   </main>
+
+  <script>
+    const openingDate = new Date(2026, 0, 14, 11, 0, 0);
+    const countdownEl = document.getElementById("countdown");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = openingDate - now;
+
+      if (diff <= 0) {
+        countdownEl.innerHTML = "<strong>Now Open!</strong> Come see us today.";
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / (60 * 60 * 24));
+      const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
+      const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+      const seconds = totalSeconds % 60;
+
+      countdownEl.innerHTML =
+        "<strong>" +
+        days + "d " +
+        String(hours).padStart(2, "0") + "h " +
+        String(minutes).padStart(2, "0") + "m " +
+        String(seconds).padStart(2, "0") + "s" +
+        "</strong> until the doors open.";
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
-
-

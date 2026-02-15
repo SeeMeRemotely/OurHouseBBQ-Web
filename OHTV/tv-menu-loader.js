@@ -1,15 +1,12 @@
 // TV Menu Loader for Our House BBQ
-// Uses the same Google Sheets data as the main menu
+// Your published Google Sheet CSV URL
 
-// Replace with your actual Sheet ID
-const SHEET_ID = 'YOUR_SHEET_ID';
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSobM8bRtCBciTJu4weHyJuklDC70oORiaJsfuI1Zv2blUgWF8-LJv1S7bQ5V8LUL31e6KqtPcQVAP6/pub?gid=339991556&single=true&output=csv';
 
 // Load menu from published CSV
 async function loadMenuFromCSV() {
-    const CSV_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vSobM8bRtCBciTJu4weHyJuklDC70oORiaJsfuI1Zv2blUgWF8-LJv1S7bQ5V8LUL31e6KqtPcQVAP6/pub?gid=339991556&single=true&output=csv`;
-    
     try {
-        const response = await fetch(CSV_URL);
+        const response = await fetch(SHEET_CSV_URL);
         const csvText = await response.text();
         const rows = parseCSV(csvText);
         processMenuData(rows);
@@ -56,7 +53,7 @@ function processMenuData(rows) {
     
     const menuData = {};
     
-    // Group items by category
+    // Group items by category (skip header row)
     for (let i = 1; i < rows.length; i++) {
         const row = rows[i];
         if (!row || row.length < 4) continue;

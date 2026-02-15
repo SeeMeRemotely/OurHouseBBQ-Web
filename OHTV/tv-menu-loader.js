@@ -6,7 +6,7 @@ const SHEET_ID = 'YOUR_SHEET_ID';
 
 // Load menu from published CSV
 async function loadMenuFromCSV() {
-    const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
+    const CSV_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vSobM8bRtCBciTJu4weHyJuklDC70oORiaJsfuI1Zv2blUgWF8-LJv1S7bQ5V8LUL31e6KqtPcQVAP6/pub?gid=339991556&single=true&output=csv`;
     
     try {
         const response = await fetch(CSV_URL);

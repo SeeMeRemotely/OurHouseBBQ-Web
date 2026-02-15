@@ -1,31 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our House BBQ Co. - Menu</title>
-    <link rel="stylesheet" href="tv-menu-styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our House BBQ Co. - Menu</title>
+  <link rel="stylesheet" href="tv-menu-styles.css" />
 </head>
 <body>
-    <div class="tv-menu">
-        <!-- Header -->
-        <header class="tv-header">
-            <img src="logo.png" alt="Our House BBQ Co." class="tv-logo-img">
-        </header>
-
-        <!-- Loading indicator -->
-        <div id="tv-loading" class="tv-loading">
-            <p>Loading menu...</p>
+  <div class="tv-menu">
+    <!-- Header -->
+    <header class="tv-header">
+      <div class="tv-header-inner">
+        <img src="logo.png" alt="Our House BBQ Co." class="tv-logo-img" />
+        <div class="tv-header-meta">
+          <div class="tv-now" id="tv-now">Today</div>
+          <div class="tv-sub">Counter service • Order at the register</div>
         </div>
+      </div>
+    </header>
 
-        <!-- Error message -->
-        <div id="tv-error" class="tv-error" style="display: none;">
-            <p>Unable to load menu</p>
+    <!-- Status row -->
+    <div class="tv-statusbar">
+      <div class="tv-status-pill" id="tv-status-pill">Live Menu</div>
+      <div class="tv-status-note" id="tv-status-note">Items update automatically</div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="tv-loading" class="tv-loading">
+      <div class="tv-loading-card">
+        <div class="spinner"></div>
+        <div class="tv-loading-text">
+          <div class="tv-loading-title">Loading menu…</div>
+          <div class="tv-loading-sub">Please wait</div>
         </div>
+      </div>
+    </div>
 
-        <!-- Menu content - will be populated dynamically -->
-        <div id="tv-menu-container" class="tv-menu-container"></div>
+    <!-- Error message -->
+    <div id="tv-error" class="tv-error" style="display:none;">
+      <div class="tv-error-card">
+        <div class="tv-error-title">Unable to load menu</div>
+        <div class="tv-error-sub">Check internet / Google Sheet access</div>
+      </div>
+    </div>
 
-    <script src="tv-menu-loader.js"></script>
+    <!-- Menu content - populated dynamically -->
+    <main id="tv-menu-container" class="tv-menu-container"></main>
+
+    <footer class="tv-footer">
+      <div class="tv-footer-left">Prices and availability subject to change</div>
+      <div class="tv-footer-right" id="tv-clock">--:--</div>
+    </footer>
+  </div>
+
+  <script>
+    // Purely visual helpers (safe even if your loader fails)
+    const pad = (n) => String(n).padStart(2, "0");
+    const tick = () => {
+      const d = new Date();
+      const h = d.getHours();
+      const hr = ((h + 11) % 12) + 1;
+      const ampm = h >= 12 ? "PM" : "AM";
+      const text = `${hr}:${pad(d.getMinutes())} ${ampm}`;
+      const day = d.toLocaleDateString(undefined, { weekday: "long", month: "short", day: "numeric" });
+
+      const clock = document.getElementById("tv-clock");
+      const now = document.getElementById("tv-now");
+      if (clock) clock.textContent = text;
+      if (now) now.textContent = day;
+    };
+    tick();
+    setInterval(tick, 1000);
+  </script>
+
+  <script src="tv-menu-loader.js"></script>
 </body>
 </html>

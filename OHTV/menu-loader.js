@@ -1,8 +1,9 @@
-// Google Sheets Menu Loader
+// Google Sheets Menu Loader for Our House BBQ
 // Your published Google Sheet CSV URL
+
 const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSobM8bRtCBciTJu4weHyJuklDC70oORiaJsfuI1Zv2blUgWF8-LJv1S7bQ5V8LUL31e6KqtPcQVAP6/pub?gid=339991556&single=true&output=csv';
 
-// Function to load menu from published CSV (simpler method, no API key needed)
+// Load menu from published CSV
 async function loadMenuFromCSV() {
     try {
         const response = await fetch(SHEET_CSV_URL);
@@ -19,7 +20,6 @@ async function loadMenuFromCSV() {
 function parseCSV(text) {
     const lines = text.split('\n');
     return lines.map(line => {
-        // Simple CSV parsing (handles basic cases)
         const values = [];
         let current = '';
         let inQuotes = false;
@@ -52,10 +52,9 @@ function processMenuData(rows) {
     hideLoading();
     
     // Expected columns: Category, Item Name, Description, Price, Image URL, Badge, Active, Sold Out
-    const headers = rows[0];
     const menuData = {};
     
-    // Group items by category
+    // Group items by category (skip header row)
     for (let i = 1; i < rows.length; i++) {
         const row = rows[i];
         if (!row || row.length < 4) continue; // Skip empty rows

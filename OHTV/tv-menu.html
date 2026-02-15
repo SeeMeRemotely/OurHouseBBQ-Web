@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our House BBQ Co. - Menu</title>
+    <link rel="stylesheet" href="tv-menu-styles.css">
+</head>
+<body>
+    <div class="tv-menu">
+        <!-- Header -->
+        <header class="tv-header">
+            <div class="tv-logo">
+                <h1>Our House BBQ Co.</h1>
+                <p class="tv-tagline">Craft Barbecue • Grove, OK • Est. 2017</p>
+            </div>
+        </header>
+
+        <!-- Loading indicator -->
+        <div id="tv-loading" class="tv-loading">
+            <p>Loading menu...</p>
+        </div>
+
+        <!-- Error message -->
+        <div id="tv-error" class="tv-error" style="display: none;">
+            <p>Unable to load menu</p>
+        </div>
+
+        <!-- Menu content - will be populated dynamically -->
+        <div id="tv-menu-container" class="tv-menu-container"></div>
+
+        <!-- Footer -->
+        <footer class="tv-footer">
+            <p>Visit us at 61991 E 315 Rd, Grove, OK 74344 • Follow us on Facebook @OurHouseBbq</p>
+        </footer>
+    </div>
+
+    <script src="tv-menu-loader.js"></script>
+</body>
+</html>

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our House BBQ Co. • Menu</title>
+  <meta name="description" content="Our House BBQ Co. menu — live from Google Sheets." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg0:#0b0a08;
+      --bg1:#14110e;
+      --card: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.11);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --bbq:#d97706;
+      --bbq2:#f59e0b;
+      --cream:#f5e1c4;
+      --danger:#ef4444;
+      --shadow: 0 16px 46px rgba(0,0,0,.55);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{
+      font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1100px 700px at 20% 0%, rgba(245,158,11,.16), transparent 55%),
+        radial-gradient(900px 650px at 85% 20%, rgba(217,119,6,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height: 100dvh;
+    }
+
+    .top{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(10,8,6,.92), rgba(10,8,6,.72));
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .top-inner{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 14px 10px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .logo img{
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
+    }
+    .logo .title{ min-width: 0; }
+    .logo .title h1{
+      font-family: Oswald, sans-serif;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-size: 1.05rem;
+      line-height: 1.1;
+      color: var(--cream);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .logo .title .sub{
+      font-size: .86rem;
+      color: var(--muted);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(245,158,11,.25);
+      background: linear-gradient(90deg, rgba(217,119,6,.22), rgba(245,158,11,.10));
+      font-weight: 800;
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .pill::before{
+      content:"";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--bbq2);
+      box-shadow: 0 0 0 6px rgba(245,158,11,.12);
+    }
+
+    .search-row{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+    }
+    .search{
+      flex: 1;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 10px 28px rgba(0,0,0,.25);
+    }
+    .search input{
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .search input::placeholder{ color: rgba(255,255,255,.55); }
+    .btn{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 12px 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn:active{ transform: translateY(1px); }
+
+    .chips{
+      display:flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .chip{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.10);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-weight: 800;
+      font-size: .86rem;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .chip.active{
+      border-color: rgba(245,158,11,.35);
+      background: linear-gradient(90deg, rgba(217,119,6,.25), rgba(245,158,11,.14));
+    }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px;
+    }
+
+    .status{
+      margin: 10px 0 14px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.05);
+    }
+    .status strong{ color: var(--cream); }
+    .muted{ color: var(--muted); }
+
+    .section{
+      margin: 14px 0;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 14px 14px;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .section-title{
+      font-family: Oswald, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      font-size: 1.05rem;
+      color: var(--cream);
+    }
+    .section-sub{
+      padding: 0 14px 10px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: .92rem;
+    }
+
+    .section-count{ color: var(--muted); font-weight: 700; }
+    .section-body{
+      padding: 0 12px 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .item{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      border-radius: 16px;
+      padding: 12px;
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .item.soldout{
+      opacity: .55;
+      filter: grayscale(.25);
+    }
+
+    .thumb{
+      width: 70px;
+      height: 70px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      flex: 0 0 auto;
+    }
+    .thumb img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .item-main{ flex:1; min-width: 0; }
+    .item-name{
+      font-weight: 950;
+      font-size: 1.08rem;
+      line-height: 1.2;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items:center;
+    }
+    .item-desc{
+      margin-top: 4px;
+      color: var(--muted);
+      line-height: 1.25rem;
+      font-size: .96rem;
+      white-space: pre-line;
+    }
+
+    .item-right{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      gap: 8px;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+    .price{
+      font-weight: 950;
+      font-size: 1.15rem;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(245,158,11,.22);
+      background: linear-gradient(90deg, rgba(217,119,6,.22), rgba(245,158,11,.10));
+    }
+
+    .badge{
+      font-weight: 900;
+      font-size: .72rem;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
+    .badge.sold{
+      border-color: rgba(239,68,68,.28);
+      background: rgba(239,68,68,.16);
+    }
+
+    .foot{
+      text-align:center;
+      color: rgba(255,255,255,.55);
+      font-size: .86rem;
+      padding: 18px 8px 28px;
+    }
+
+    @media (min-width: 820px){
+      .wrap{ padding: 18px; }
+      .section-body{ grid-template-columns: 1fr 1fr; }
+      .thumb{ width: 78px; height: 78px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <div class="brand">
+        <div class="logo">
+          <img src="ourhouse-logo.png" alt="Our House BBQ Co." />
+          <div class="title">
+            <h1>Our House BBQ Co.</h1>
+            <div class="sub">Craft Barbecue • Grove, OK</div>
+          </div>
+        </div>
+        <div class="pill">Live Menu</div>
+      </div>
+
+      <div class="search-row">
+        <div class="search">
+          <span class="muted">🔎</span>
+          <input id="q" type="search" placeholder="Search brisket, ribs, sides…" autocomplete="off" />
+        </div>
+        <button class="btn" id="refreshBtn" title="Refresh menu">↻</button>
+      </div>
+
+      <div class="chips" id="chips"></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="status" id="status">
+      <strong>Loading menu…</strong>
+      <div class="muted">One sec while we pull today’s items.</div>
+    </div>
+
+    <div id="menu"></div>
+
+    <div class="foot">
+      Smoked fresh daily — when it’s gone, it’s gone.
+    </div>
+  </main>
+
+  <script>
+    // Same CSV URL as your TV loader
+    const SHEET_CSV_URL =
+      "https://docs.google.com/spreadsheets/d/e/2PACX-1vSobM8bRtCBciTJu4weHyJuklDC70oORiaJsfuI1Zv2blUgWF8-LJv1S7bQ5V8LUL31e6KqtPcQVAP6/pub?gid=339991556&single=true&output=csv";
+
+    const elMenu = document.getElementById("menu");
+    const elStatus = document.getElementById("status");
+    const elChips = document.getElementById("chips");
+    const elQ = document.getElementById("q");
+    const elRefresh = document.getElementById("refreshBtn");
+
+    // same subtitles as TV loader
+    const categorySubtitles = {
+      "Sandwiches": "Choice of 1 Side",
+      "Gettin' Loaded": "Choice of 1 Meat (Brisket & Pork Belly $3 upcharge)",
+      "Plates": "Choice of 2 Sides"
+    };
+
+    function escapeHtml(s){
+      return String(s ?? "").replace(/[&<>"']/g, (c)=>({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[c]));
+    }
+    function normalize(s){ return String(s ?? "").trim(); }
+    function isYesY(v){
+      const s = normalize(v).toLowerCase();
+      return s === "y" || s === "yes";
+    }
+    function setStatus(title, sub=""){
+      elStatus.innerHTML = `<strong>${escapeHtml(title)}</strong>${sub ? `<div class="muted">${escapeHtml(sub)}</div>` : ""}`;
+    }
+
+    // TV loader–style CSV parser (keeps things consistent)
+    function parseCSV(text) {
+      const lines = text.split("\n");
+      return lines.map(line => {
+        const values = [];
+        let current = "";
+        let inQuotes = false;
+
+        for (let i = 0; i < line.length; i++) {
+          const ch = line[i];
+          const next = line[i + 1];
+
+          if (ch === '"') {
+            if (inQuotes && next === '"') { current += '"'; i++; }
+            else inQuotes = !inQuotes;
+          } else if (ch === "," && !inQuotes) {
+            values.push(current.trim());
+            current = "";
+          } else {
+            current += ch;
+          }
+        }
+        values.push(current.trim());
+        return values;
+      });
+    }
+
+    function buildChips(categories){
+      elChips.innerHTML = "";
+      const make = (label, cat, active=false) => {
+        const b = document.createElement("button");
+        b.className = "chip" + (active ? " active" : "");
+        b.textContent = label;
+        b.dataset.cat = cat;
+        return b;
+      };
+      elChips.appendChild(make("All", "__all__", true));
+      categories.forEach(c => elChips.appendChild(make(c, c)));
+    }
+
+    function groupByCategory(items){
+      const map = new Map();
+      const cats = [];
+      for (const it of items){
+        const cat = it.category || "Menu";
+        if (!map.has(cat)){
+          map.set(cat, []);
+          cats.push(cat);
+        }
+        map.get(cat).push(it);
+      }
+      return { map, cats };
+    }
+
+    function render(items, activeCat="__all__", query=""){
+      const q = normalize(query).toLowerCase();
+
+      const filtered = items.filter(it => {
+        const inCat = activeCat === "__all__" || it.category === activeCat;
+        if (!inCat) return false;
+        if (!q) return true;
+        const hay = (it.name + " " + it.description + " " + it.category).toLowerCase();
+        return hay.includes(q);
+      });
+
+      elMenu.innerHTML = "";
+
+      if (!filtered.length){
+        elMenu.innerHTML = `<div class="status"><strong>No matches</strong><div class="muted">Try a different search.</div></div>`;
+        return;
+      }
+
+      const { map, cats } = groupByCategory(filtered);
+
+      for (const cat of cats){
+        const section = document.createElement("section");
+        section.className = "section";
+
+        const head = document.createElement("div");
+        head.className = "section-head";
+        head.innerHTML = `
+          <div class="section-title">${escapeHtml(cat)}</div>
+          <div class="section-count">${map.get(cat).length}</div>
+        `;
+
+        const sub = categorySubtitles[cat]
+          ? `<div class="section-sub">${escapeHtml(categorySubtitles[cat])}</div>`
+          : "";
+
+        const body = document.createElement("div");
+        body.className = "section-body";
+
+        map.get(cat).forEach(it => {
+          const sold = it.soldOut;
+          const badgeHtml = sold
+            ? `<div class="badge sold">Sold Out</div>`
+            : (it.badge ? `<div class="badge">${escapeHtml(it.badge)}</div>` : "");
+
+          const thumbHtml = it.image
+            ? `<div class="thumb"><img src="${escapeHtml(it.image)}" alt="${escapeHtml(it.name)}" loading="lazy"></div>`
+            : "";
+
+          const item = document.createElement("div");
+          item.className = "item" + (sold ? " soldout" : "");
+          item.innerHTML = `
+            ${thumbHtml}
+            <div class="item-main">
+              <div class="item-name">${escapeHtml(it.name)}</div>
+              ${it.description ? `<div class="item-desc">${escapeHtml(it.description)}</div>` : ""}
+            </div>
+            <div class="item-right">
+              ${it.price ? `<div class="price">${escapeHtml(it.price)}</div>` : ""}
+              ${badgeHtml}
+            </div>
+          `;
+          body.appendChild(item);
+        });
+
+        // tap header to collapse/expand
+        let open = true;
+        head.addEventListener("click", () => {
+          open = !open;
+          body.style.display = open ? "grid" : "none";
+        });
+
+        section.innerHTML = "";
+        section.appendChild(head);
+        if (sub) section.insertAdjacentHTML("beforeend", sub);
+        section.appendChild(body);
+        elMenu.appendChild(section);
+      }
+    }
+
+    async function loadMenu(){
+      setStatus("Loading menu…", "Pulling the latest items from Google Sheets.");
+      elMenu.innerHTML = "";
+
+      try{
+        const res = await fetch(SHEET_CSV_URL + "&cb=" + Date.now(), { cache: "no-store" });
+        const csvText = await res.text();
+        const rows = parseCSV(csvText);
+
+        // Match your TV loader’s exact column positions:
+        // 0 Category, 1 Item Name, 2 Description, 3 Price, 4 Image URL, 5 Badge, 6 Active, 7 Sold Out
+        const items = [];
+        for (let i = 1; i < rows.length; i++){
+          const r = rows[i];
+          if (!r || r.length < 4) continue;
+
+          const category = r[0] || "";
+          const name = r[1] || "";
+          const description = r[2] || "";
+          const price = r[3] || "";
+          const image = r[4] || "";
+          const badge = r[5] || "";
+          const active = (r[6] || "").toLowerCase();
+          const soldOut = (r[7] || "").toLowerCase();
+
+          if (!category || !name) continue;
+
+          // Same “active” rule as TV loader
+          if (active && active !== "y" && active !== "yes") continue;
+
+          items.push({
+            category: normalize(category),
+            name: normalize(name),
+            description: normalize(description),
+            price: normalize(price),
+            image: normalize(image),
+            badge: normalize(badge),
+            soldOut: soldOut === "y" || soldOut === "yes"
+          });
+        }
+
+        const { cats } = groupByCategory(items);
+        buildChips(cats);
+
+        let activeCat = "__all__";
+        let query = "";
+
+        function setActiveChip(cat){
+          activeCat = cat;
+          [...elChips.querySelectorAll(".chip")].forEach(ch => ch.classList.toggle("active", ch.dataset.cat === cat));
+          render(items, activeCat, query);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        elChips.onclick = (e) => {
+          const btn = e.target.closest(".chip");
+          if (!btn) return;
+          setActiveChip(btn.dataset.cat);
+        };
+
+        elQ.oninput = () => {
+          query = elQ.value || "";
+          render(items, activeCat, query);
+        };
+
+        elRefresh.onclick = () => loadMenu();
+
+        render(items, activeCat, query);
+        setStatus("Menu loaded", "Updates automatically every few minutes.");
+
+        // Auto-refresh every 5 minutes (same as TV loader)
+        clearTimeout(window.__menuRefreshTimer);
+        window.__menuRefreshTimer = setTimeout(loadMenu, 5 * 60 * 1000);
+
+      } catch(err){
+        console.error(err);
+        setStatus("Unable to load menu", "Check the published link and that the sheet is publicly accessible.");
+      }
+    }
+
+    loadMenu();
+  </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Our House BBQ Co. • Catering Request</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Request catering from Our House BBQ Co. Browse active menu items and send us your event details." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="catering.css" />
+</head>
+<body>
+  <div class="smoke"></div>
+
+  <div class="wrap">
+    <main class="card" role="main">
+      <img src="ourhouse-logo.png" alt="Our House BBQ Co. logo" class="logo" />
+
+      <div class="location">Grove, Oklahoma</div>
+
+      <div class="status-pill" aria-label="Catering Requests">
+        <span class="dot" aria-hidden="true"></span>
+        Catering Requests
+      </div>
+
+      <div class="headline">Let Us Feed Your Crowd</div>
+
+      <p class="tagline">
+        Build your catering request from our current active menu, send us your event details,
+        and we’ll follow up to confirm everything.
+      </p>
+
+      <p class="smalltag">
+        This is a request form only — no payment is collected here.
+      </p>
+
+      <div class="divider"></div>
+
+      <section class="intro-box">
+        <div class="intro-grid">
+          <div class="intro-pill">✔ Active menu only</div>
+          <div class="intro-pill">✔ Request by item</div>
+          <div class="intro-pill">✔ Pickup or delivery</div>
+          <div class="intro-pill">✔ Confirmation email sent</div>
+        </div>
+      </section>
+
+      <section class="menu-shell">
+        <div class="section-head">
+          <h2>Build Your Request</h2>
+          <p>Choose quantities for any items you’d like us to quote or confirm for your event.</p>
+        </div>
+
+        <div id="menuStatus" class="menu-status">Loading menu…</div>
+        <div id="menuContainer" class="menu-container"></div>
+      </section>
+
+      <section class="form-shell">
+        <div class="section-head">
+          <h2>Your Event Details</h2>
+          <p>Tell us a little about the event so we can follow up with availability and details.</p>
+        </div>
+
+        <form id="cateringForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="customerName">Name *</label>
+              <input id="customerName" name="customerName" type="text" required />
+            </div>
+
+            <div class="field">
+              <label for="customerPhone">Phone *</label>
+              <input id="customerPhone" name="customerPhone" type="tel" required />
+            </div>
+
+            <div class="field">
+              <label for="customerEmail">Email *</label>
+              <input id="customerEmail" name="customerEmail" type="email" required />
+            </div>
+
+            <div class="field">
+              <label for="eventName">Company / Event Name</label>
+              <input id="eventName" name="eventName" type="text" />
+            </div>
+
+            <div class="field">
+              <label for="eventDate">Event Date *</label>
+              <input id="eventDate" name="eventDate" type="date" required />
+            </div>
+
+            <div class="field">
+              <label for="eventTime">Event Time</label>
+              <input id="eventTime" name="eventTime" type="time" />
+            </div>
+
+            <div class="field">
+              <label for="serviceType">Pickup or Delivery *</label>
+              <select id="serviceType" name="serviceType" required>
+                <option value="">Select one</option>
+                <option value="Pickup">Pickup</option>
+                <option value="Delivery">Delivery</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="guestCount">Estimated Guest Count</label>
+              <input id="guestCount" name="guestCount" type="number" min="1" step="1" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="eventAddress">Delivery Address / Event Location</label>
+            <input id="eventAddress" name="eventAddress" type="text" />
+          </div>
+
+          <div class="field">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" rows="5" placeholder="Tell us anything helpful: serving style, timing, special requests, etc."></textarea>
+          </div>
+
+          <!-- Honeypot -->
+          <div class="hp-wrap" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="submit-row">
+            <button id="submitBtn" type="submit" class="btn btn-primary">Send Catering Request</button>
+            <a class="btn btn-dark" href="index.html">Back to Main Site</a>
+          </div>
+
+          <div id="formMessage" class="form-message" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    window.CATERING_CONFIG = {
+      menuCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSobM8bRtCBciTJu4weHyJuklDC70oORiaJsfuI1Zv2blUgWF8-LJv1S7bQ5V8LUL31e6KqtPcQVAP6/pub?output=csv",
+      apiUrl: "https://ourhousebbq-catering-mailer-833295204397.us-central1.run.app/submit-catering",
+      restaurantName: "Our House BBQ Co.",
+      confirmationFromName: "Our House BBQ Catering"
+    };
+  </script>
+  <script src="catering.js"></script>
+</body>
+</html>

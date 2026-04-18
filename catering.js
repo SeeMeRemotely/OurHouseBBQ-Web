@@ -130,6 +130,7 @@ function renderMenu(items) {
                 class="qty-input"
                 type="number"
                 min="0"
+                max="1000"
                 step="1"
                 inputmode="numeric"
                 data-item-name="${escapeHtml(item.name)}"
@@ -169,7 +170,14 @@ function getRequestedItems() {
 
   return inputs
     .map(input => {
-      const quantity = Number(input.value || 0);
+      let quantity = Number(input.value || 0);
+
+      if (!Number.isFinite(quantity) || quantity < 0) quantity = 0;
+      if (quantity > 1000) quantity = 1000;
+      quantity = Math.floor(quantity);
+
+      input.value = String(quantity);
+
       return {
         category: input.dataset.itemCategory || "",
         name: input.dataset.itemName || "",

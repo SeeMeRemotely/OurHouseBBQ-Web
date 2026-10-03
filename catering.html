@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Our House BBQ Co. • Catering Request</title>
+  <title>Our House BBQ Co. • Book the Trailer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Request catering from Our House BBQ Co. Browse active menu items and send us your event details." />
+  <meta name="description" content="Book the Our House BBQ Co. trailer for your event. The same slow-smoked premium meats, cooked fresh on site around Grand Lake." />
 
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="catering.css" />
@@ -16,17 +16,18 @@
     <main class="card" role="main">
       <img src="ourhouse-logo.png" alt="Our House BBQ Co. logo" class="logo" />
 
-      <div class="location">Grove, Oklahoma</div>
+      <div class="location">Grove, Oklahoma · Grand Lake</div>
 
-      <div class="status-pill" aria-label="Catering Requests">
+      <div class="status-pill" aria-label="Trailer Catering">
         <span class="dot" aria-hidden="true"></span>
-        Catering Requests
+        Trailer Catering
       </div>
 
-      <div class="headline">Let Us Feed Your Crowd</div>
+      <div class="headline">Bring the Trailer to Your Event</div>
 
       <p class="tagline">
-        Build your catering request from our current active menu, send us your event details,
+        Our House BBQ Co. is hitting the road, and the trailer can roll right up to your event
+        with the same slow-smoked premium meats. Build your request, send us the details,
         and we’ll follow up to confirm everything.
       </p>
 
@@ -38,9 +39,9 @@
 
       <section class="intro-box">
         <div class="intro-grid">
-          <div class="intro-pill">✔ Active menu only</div>
+          <div class="intro-pill">✔ Trailer on site</div>
           <div class="intro-pill">✔ Request by item</div>
-          <div class="intro-pill">✔ Pickup or delivery</div>
+          <div class="intro-pill">✔ Drop-off available</div>
           <div class="intro-pill">✔ Confirmation email sent</div>
         </div>
       </section>
@@ -103,11 +104,11 @@
             </div>
 
             <div class="field">
-              <label for="serviceType">Pickup or Delivery *</label>
+              <label for="serviceType">Service Type *</label>
               <select id="serviceType" name="serviceType" required>
                 <option value="">Select one</option>
-                <option value="Pickup">Pickup</option>
-                <option value="Delivery">Delivery</option>
+                <option value="Trailer on site">Trailer on site</option>
+                <option value="Drop-off delivery">Drop-off delivery</option>
               </select>
             </div>
 
@@ -118,13 +119,13 @@
           </div>
 
           <div class="field">
-            <label for="eventAddress">Delivery Address / Event Location</label>
+            <label for="eventAddress">Event Location / Address</label>
             <input id="eventAddress" name="eventAddress" type="text" />
           </div>
 
           <div class="field">
             <label for="notes">Notes</label>
-            <textarea id="notes" name="notes" rows="5" placeholder="Tell us anything helpful: serving style, timing, special requests, etc."></textarea>
+            <textarea id="notes" name="notes" rows="5" placeholder="Tell us anything helpful: where the trailer can park, power or water on site, timing, special requests, etc."></textarea>
           </div>
 
           <!-- Honeypot -->

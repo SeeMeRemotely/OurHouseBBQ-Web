@@ -198,7 +198,7 @@ function validateForm(data) {
   if (!data.customerPhone.trim()) return "Please enter your phone number.";
   if (!data.customerEmail.trim()) return "Please enter your email address.";
   if (!data.eventDate.trim()) return "Please select an event date.";
-  if (!data.serviceType.trim()) return "Please choose pickup or delivery.";
+  if (!data.serviceType.trim()) return "Please choose a service type.";
   if (!data.items.length) return "Please add at least one requested item.";
   return "";
 }

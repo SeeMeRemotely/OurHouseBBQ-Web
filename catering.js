@@ -118,7 +118,6 @@ function renderMenu(items) {
             <div class="item-main">
               <div class="item-topline">
                 <div class="item-name">${escapeHtml(item.name)}</div>
-                ${item.price ? `<div class="item-price">${escapeHtml(item.price)}</div>` : ""}
                 ${item.badge ? `<div class="item-badge">${escapeHtml(item.badge)}</div>` : ""}
               </div>
               ${item.description ? `<div class="item-desc">${escapeHtml(item.description)}</div>` : ""}
@@ -135,7 +134,6 @@ function renderMenu(items) {
                 inputmode="numeric"
                 data-item-name="${escapeHtml(item.name)}"
                 data-item-category="${escapeHtml(item.category)}"
-                data-item-price="${escapeHtml(item.price)}"
                 value="0"
               />
             </div>
@@ -181,7 +179,6 @@ function getRequestedItems() {
       return {
         category: input.dataset.itemCategory || "",
         name: input.dataset.itemName || "",
-        price: input.dataset.itemPrice || "",
         quantity
       };
     })
